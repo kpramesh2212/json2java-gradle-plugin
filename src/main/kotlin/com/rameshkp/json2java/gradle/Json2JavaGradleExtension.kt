@@ -4,7 +4,6 @@ package com.rameshkp.json2java.gradle
 
 import org.gradle.api.file.*
 import org.gradle.api.model.ObjectFactory
-import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import org.jsonschema2pojo.*
@@ -30,8 +29,6 @@ open class Json2JavaGradleExtension @Inject constructor(objectFactory: ObjectFac
     val useTitleAsClassname: Property<Boolean> = objectFactory.property(Boolean::class.java)
     val annotationStyle: Property<AnnotationStyle> = objectFactory.property(AnnotationStyle::class.java)
     val inclusionLevel: Property<InclusionLevel> = objectFactory.property(InclusionLevel::class.java)
-    val customAnnotator: Property<out Annotator> = objectFactory.property(Annotator::class.java)
-    val customRuleFactory: Property<out RuleFactory> = objectFactory.property(RuleFactory::class.java)
 
     val includeJsr303Annotations: Property<Boolean> = objectFactory.property(Boolean::class.java)
     val includeJsr305Annotations: Property<Boolean> = objectFactory.property(Boolean::class.java)
@@ -39,7 +36,6 @@ open class Json2JavaGradleExtension @Inject constructor(objectFactory: ObjectFac
 
     val sourceType: Property<SourceType> = objectFactory.property(SourceType::class.java)
     val outputEncoding: Property<String> = objectFactory.property(String::class.java)
-    val removeOldOutput: Property<Boolean> = objectFactory.property(Boolean::class.java)
 
     val useJodaDates: Property<Boolean> = objectFactory.property(Boolean::class.java)
     val useJodaLocalDates: Property<Boolean> = objectFactory.property(Boolean::class.java)
@@ -47,7 +43,6 @@ open class Json2JavaGradleExtension @Inject constructor(objectFactory: ObjectFac
     val parcelable: Property<Boolean> = objectFactory.property(Boolean::class.java)
     val serializable: Property<Boolean> = objectFactory.property(Boolean::class.java)
 
-    val fileFilter: Property<FileFilter> = objectFactory.property(FileFilter::class.java)
     val initializeCollections: Property<Boolean> = objectFactory.property(Boolean::class.java)
 
     val classNamePrefix: Property<String> = objectFactory.property(String::class.java)
@@ -83,8 +78,6 @@ open class Json2JavaGradleExtension @Inject constructor(objectFactory: ObjectFac
     val customTimePattern: Property<String> = objectFactory.property(String::class.java)
     val customDateTimePattern: Property<String> = objectFactory.property(String::class.java)
 
-    val sourceSortOrder: Property<SourceSortOrder> = objectFactory.property(SourceSortOrder::class.java)
-    val targetLanguage: Property<Language> = objectFactory.property(Language::class.java)
     val formatTypeMapping: MapProperty<String,String> = objectFactory.mapProperty(String::class.java, String::class.java)
 
     val userInnerClassBuilders: Property<Boolean> = objectFactory.property(Boolean::class.java)

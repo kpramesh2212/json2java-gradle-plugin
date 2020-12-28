@@ -4,7 +4,6 @@ import org.jsonschema2pojo.*
 import org.jsonschema2pojo.rules.RuleFactory
 import java.io.File
 import java.io.FileFilter
-import java.net.URL
 
 class Json2JavaGenerationConfig (private val extension: Json2JavaGradleExtension): DefaultGenerationConfig() {
 
@@ -76,20 +75,6 @@ class Json2JavaGenerationConfig (private val extension: Json2JavaGradleExtension
         return extension.inclusionLevel.getOrElse(super.getInclusionLevel())
     }
 
-    override fun getCustomAnnotator(): Class<out Annotator> {
-        if (extension.customAnnotator.isPresent) {
-           return extension.customAnnotator.get().javaClass.asSubclass(Annotator::class.java)
-        }
-        return super.getCustomAnnotator()
-    }
-
-    override fun getCustomRuleFactory(): Class<out RuleFactory> {
-        if (extension.customRuleFactory.isPresent) {
-            return extension.customRuleFactory.get().javaClass.asSubclass(RuleFactory::class.java)
-        }
-        return super.getCustomRuleFactory()
-    }
-
     override fun isIncludeJsr303Annotations(): Boolean {
         return extension.includeJsr303Annotations.getOrElse(super.isIncludeJsr303Annotations())
     }
@@ -104,10 +89,6 @@ class Json2JavaGenerationConfig (private val extension: Json2JavaGradleExtension
 
     override fun getSourceType(): SourceType {
         return extension.sourceType.getOrElse(super.getSourceType())
-    }
-
-    override fun isRemoveOldOutput(): Boolean {
-        return extension.removeOldOutput.getOrElse(super.isRemoveOldOutput())
     }
 
     override fun getOutputEncoding(): String {
@@ -132,10 +113,6 @@ class Json2JavaGenerationConfig (private val extension: Json2JavaGradleExtension
 
     override fun isSerializable(): Boolean {
         return extension.serializable.getOrElse(super.isSerializable())
-    }
-
-    override fun getFileFilter(): FileFilter {
-        return extension.fileFilter.getOrElse(super.getFileFilter())
     }
 
     override fun isInitializeCollections(): Boolean {
@@ -244,14 +221,6 @@ class Json2JavaGenerationConfig (private val extension: Json2JavaGradleExtension
 
     override fun getRefFragmentPathDelimiters(): String {
         return extension.refFragmentPathDelimiters.getOrElse(super.getRefFragmentPathDelimiters())
-    }
-
-    override fun getSourceSortOrder(): SourceSortOrder {
-        return extension.sourceSortOrder.getOrElse(super.getSourceSortOrder())
-    }
-
-    override fun getTargetLanguage(): Language {
-        return extension.targetLanguage.getOrElse(super.getTargetLanguage())
     }
 
     override fun getFormatTypeMapping(): MutableMap<String, String> {

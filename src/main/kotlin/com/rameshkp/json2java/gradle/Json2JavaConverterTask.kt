@@ -4,30 +4,26 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.sun.codemodel.JCodeModel
 import org.gradle.api.DefaultTask
 import org.gradle.api.InvalidUserDataException
-import org.gradle.api.file.ConfigurableFileCollection
-import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.file.Directory
+import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
-import org.gradle.api.tasks.SkipWhenEmpty
 import org.gradle.api.tasks.TaskAction
 import org.jsonschema2pojo.*
 import org.jsonschema2pojo.rules.RuleFactory
 import java.io.File
 import javax.inject.Inject
 
-@Suppress("UnstableApiUsage")
-open class Json2JavaConverterTask @Inject constructor(private val extension: Json2JavaGradleExtension, private val sourceSet: JsonSourceSet): DefaultTask() {
+open class Json2JavaConverterTask @Inject constructor(private val extension: Json2JavaGradleExtension, private val sourceSet: SourceDirectorySet): DefaultTask() {
 
     @get:InputFiles
     val inputFiles: Set<File> get() {
-        val sources = sourceSet.schema
         val fileTree = extension.input.asFileTree.matching {
-            setIncludes(sources.filter.includes)
-            setExcludes(sources.filter.excludes)
+            setIncludes(sourceSet.filter.includes)
+            setExcludes(sourceSet.filter.excludes)
         }
-        return sources.files + fileTree.files
+        return sourceSet.files + fileTree.files
     }
 
     @OutputDirectory
